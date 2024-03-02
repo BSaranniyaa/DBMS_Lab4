@@ -284,8 +284,10 @@ WHERE
 /* 10) Create a stored procedure to display supplier id, name, Rating(Average rating of all the products sold by every customer) and
 Type_of_Service. For Type_of_Service, If rating =5, print “Excellent Service”,If rating >4 print “Good Service”, If rating >2 print “Average
 Service” else print “Poor Service”. Note that there should be one rating per supplier.*/
-
-SELECT 
+DELIMITER &&
+		CREATE PROCEDURE display_supplier_ratings_procedure()
+		BEGIN
+			SELECT 
     SUPP_ID,
     SUPP_NAME,
     AVG(RAT_RATSTARS),
@@ -304,4 +306,7 @@ FROM
         JOIN
     rating USING (ORD_ID)
 GROUP BY SUPP_NAME;
-
+		END &&
+		DELIMITER ;
+        
+call display_supplier_ratings_procedure();

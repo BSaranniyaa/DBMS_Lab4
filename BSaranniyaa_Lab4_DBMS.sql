@@ -242,14 +242,15 @@ HAVING COUNT(*) > 1;
 
 SET sql_mode = 'TRADITIONAL';
 SELECT 
-    CAT_NAME, PRO_NAME, PRO_DESC, MIN(SUPP_PRICE)
+    CAT_ID, PRO_NAME, PRO_DESC, MIN(SUPP_PRICE)
 FROM
     category
         JOIN
     product USING (CAT_ID)
         JOIN
     supplier_pricing USING (PRO_ID)
-GROUP BY CAT_NAME;
+GROUP BY CAT_ID 
+HAVING MIN(SUPP_PRICE);
 
 # 8) Display the Id and Name of the Product ordered after “2021-10-05”.
 
